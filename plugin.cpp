@@ -123,22 +123,6 @@ namespace onnx2trt {
 
 // ========================= NvPlugin =====================
 
-  const char* NvPlugin::getPluginType() const {
-    using namespace nvinfer1;
-    switch( _plugin->getPluginType() ) {
-    case PluginType::kFASTERRCNN:         return "FasterRCNN";
-    case PluginType::kNORMALIZE:          return "Normalize";
-    case PluginType::kPERMUTE:            return "Permute";
-    case PluginType::kPRIORBOX:           return "SSDPriorBox";
-    case PluginType::kSSDDETECTIONOUTPUT: return "SSDDetectionOutput";
-    case PluginType::kCONCAT:             return "Concat";
-    case PluginType::kPRELU:              return "PRelu";
-    case PluginType::kYOLOREORG:          return "YoloReorg";
-    case PluginType::kYOLOREGION:         return "YoloRegion";
-    default: return "Unknown";
-    }
-  }
-
   void NvPlugin::destroy() {
     if (_plugin) {
 #if NV_TENSORRT_MAJOR >= 4 // WAR for double-free issue with NvPlugins in TRT 3
